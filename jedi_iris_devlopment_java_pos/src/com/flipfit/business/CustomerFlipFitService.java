@@ -8,25 +8,19 @@ public class CustomerFlipFitService implements CustomerFlipFitInterface {
 
     @Override
     public boolean bookSlot(String bookingId, String slotId, String customerId) {
-        System.out.println("Booking initiated for Customer: " + customerId + " on Slot: " + slotId);
+        System.out.println("Slot booked for customer: " + customerId);
         return true;
     }
 
     @Override
-    public boolean cancelBooking(String bookingId, String customerId) {
-        System.out.println("Cancelling booking: " + bookingId);
+    public boolean cancelBooking(String bookingId) {
+        System.out.println("Booking cancelled: " + bookingId);
         return true;
     }
 
     @Override
-    public List<Booking> viewMyBookings(String customerId) {
+    public List<Booking> getMyBookings(String customerId) {
         System.out.println("Fetching bookings for customer: " + customerId);
-        return new ArrayList<>(); // Returns empty list for now
-    }
-
-    @Override
-    public boolean makePayment(String bookingId) {
-        System.out.println("Payment successful for Booking: " + bookingId);
-        return true;
+        return new ArrayList<>();
     }
 }

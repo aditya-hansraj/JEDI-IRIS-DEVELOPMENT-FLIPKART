@@ -20,4 +20,8 @@ public class Admin extends User {
         this.accountNumber = accountNumber;
     }
 
+    public Admin() {
+        setRole("Admin");
+    }
+
 }

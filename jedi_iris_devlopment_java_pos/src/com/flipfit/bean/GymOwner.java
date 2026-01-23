@@ -3,52 +3,19 @@ package com.flipfit.bean;
 import java.util.List;
 
 public class GymOwner extends User {
-    private String ownerId;
-    private String accountNumber;
-    private String debitCard;
-    private String creditCard;
-    // In the diagram, Owner has a relationship with "city" (Centres).
-    // We represent that as a List of centre IDs here.
-    private List<String> gymCentreIds;
+    private String panNumber;
+    private String cardDetails;
+    private boolean isApproved; // False by default
 
-    public String getOwnerId() {
-        return ownerId;
+    public GymOwner() {
+        setRole("GymOwner");
+        this.isApproved = false;
     }
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getDebitCard() {
-        return debitCard;
-    }
-
-    public void setDebitCard(String debitCard) {
-        this.debitCard = debitCard;
-    }
-
-    public String getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public List<String> getGymCentreIds() {
-        return gymCentreIds;
-    }
-
-    public void setGymCentreIds(List<String> gymCentreIds) {
-        this.gymCentreIds = gymCentreIds;
-    }
-
+    public String getPanNumber() { return panNumber; }
+    public void setPanNumber(String panNumber) { this.panNumber = panNumber; }
+    public String getCardDetails() { return cardDetails; }
+    public void setCardDetails(String cardDetails) { this.cardDetails = cardDetails; }
+    public boolean isApproved() { return isApproved; }
+    public void setApproved(boolean approved) { isApproved = approved; }
 }

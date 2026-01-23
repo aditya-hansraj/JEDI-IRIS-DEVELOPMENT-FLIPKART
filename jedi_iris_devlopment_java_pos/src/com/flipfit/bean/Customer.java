@@ -1,31 +1,15 @@
 package com.flipfit.bean;
 
 public class Customer extends User {
-    private String customerId;
-    private String debitCard;
-    private String creditCard;
+    private String customerPhone;
+    private String cardDetails;
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer() {
+        setRole("Customer");
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getDebitCard() {
-        return debitCard;
-    }
-
-    public void setDebitCard(String debitCard) {
-        this.debitCard = debitCard;
-    }
-
-    public String getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
-    }
+    public String getCustomerPhone() { return customerPhone; }
+    public void setCustomerPhone(String customerPhone) { this.customerPhone = customerPhone; }
+    public String getCardDetails() { return cardDetails; }
+    public void setCardDetails(String cardDetails) { this.cardDetails = cardDetails; }
 }
