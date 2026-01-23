@@ -7,7 +7,6 @@ public class UserFlipFitService implements UserFlipFitInterface {
 
     @Override
     public boolean login(String userName, String password) {
-        // In real app: check against DB
         System.out.println("User " + userName + " logged in successfully.");
         return true;
     }
@@ -15,7 +14,6 @@ public class UserFlipFitService implements UserFlipFitInterface {
     @Override
     public void registerCustomer(GymCustomer gymCustomer) {
         System.out.println("Registering Customer: " + gymCustomer.getUserName());
-        // SHOW OFF LINE: accessing the Role object
         System.out.println("Role: " + gymCustomer.getRole().getRoleName());
         System.out.println("--------------------------------");
     }
@@ -23,7 +21,6 @@ public class UserFlipFitService implements UserFlipFitInterface {
     @Override
     public void registerGymOwner(GymOwner gymOwner) {
         System.out.println("Registering Gym Owner: " + gymOwner.getUserName());
-        // SHOW OFF LINE: accessing the Role object
         System.out.println("Role: " + gymOwner.getRole().getRoleName());
         System.out.println("Status: Pending Approval");
         System.out.println("--------------------------------");
@@ -31,7 +28,13 @@ public class UserFlipFitService implements UserFlipFitInterface {
 
     @Override
     public boolean updatePassword(String email, String newPassword) {
-        System.out.println("Password updated for: " + email);
+        System.out.println("Password updated for email: " + email);
         return true;
+    }
+
+    public boolean changePassword(String userName, String oldPassword, String newPassword) {
+        System.out.println("Verifying old password for " + userName + "...");
+        System.out.println("Password successfully changed for user: " + userName);
+        return true; 
     }
 }

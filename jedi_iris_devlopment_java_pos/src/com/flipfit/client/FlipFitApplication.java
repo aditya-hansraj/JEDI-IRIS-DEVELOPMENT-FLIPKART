@@ -17,11 +17,12 @@ public class FlipFitApplication {
         GymOwnerFlipFitClient ownerClient = new GymOwnerFlipFitClient();
 
         while (true) {
-            System.out.println("\n=== FLIPFIT APPLICATION ===");
+            System.out.println("\n=== WELCOME TO THE FLIPFIT APPLICATION FOR GYM ===");
             System.out.println("1. Login");
             System.out.println("2. Register as Customer");
             System.out.println("3. Register as Gym Owner");
-            System.out.println("4. Exit");
+            System.out.println("4. Change Password");
+            System.out.println("5. Exit");
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
 
@@ -29,7 +30,7 @@ public class FlipFitApplication {
                 case 1:
                     System.out.println("--- LOGIN ---");
                     System.out.print("Enter Username: ");
-                    String user = scanner.next(); // <--- We capture this name
+                    String user = scanner.next(); 
                     System.out.print("Enter Password: ");
                     String pass = scanner.next();
                     System.out.print("Enter Role (Admin/Customer/GymOwner): ");
@@ -39,17 +40,14 @@ public class FlipFitApplication {
                         if (role.equalsIgnoreCase("Admin")) {
                             adminClient.adminMenu(scanner);
                         } else if (role.equalsIgnoreCase("Customer")) {
-                            // HERE IS THE FIX: We pass 'user' into the menu
                             customerClient.customerMenu(scanner, user);
                         } else if (role.equalsIgnoreCase("GymOwner")) {
-                            // You can do the same for GymOwner if you want
                             ownerClient.gymOwnerMenu(scanner);
                         } else {
                             System.out.println("Invalid Role Selected.");
                         }
                     }
                     break;
-
 
                 case 2:
                     System.out.println("--- CUSTOMER REGISTRATION ---");
@@ -86,6 +84,23 @@ public class FlipFitApplication {
                     break;
 
                 case 4:
+                    System.out.println("--- CHANGE PASSWORD ---");
+                    System.out.print("Enter Username: ");
+                    String userName = scanner.next();
+                    System.out.print("Enter Old Password: ");
+                    String oldPass = scanner.next();
+                    System.out.print("Enter New Password: ");
+                    String newPass = scanner.next();
+                    
+                    boolean isChanged = userService.changePassword(userName, oldPass, newPass);
+                    if (isChanged) {
+                        System.out.println("Password changed successfully!");
+                    } else {
+                        System.out.println("Failed to change password. Please check your credentials.");
+                    }
+                    break;
+
+                case 5:
                     System.out.println("Exiting Application. Goodbye!");
                     System.exit(0);
                     break;
