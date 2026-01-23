@@ -8,5 +8,5 @@ public interface UserFlipFitInterface {
     boolean login(String userName, String password);
     void registerCustomer(GymCustomer gymCustomer);
     void registerGymOwner(GymOwner gymOwner);
-    boolean updatePassword(String email, String newPassword);
+    boolean changePassword(String userName, String oldPassword, String newPassword);
 }

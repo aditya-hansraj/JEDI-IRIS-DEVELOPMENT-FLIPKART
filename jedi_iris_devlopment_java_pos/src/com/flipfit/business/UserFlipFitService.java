@@ -27,13 +27,8 @@ public class UserFlipFitService implements UserFlipFitInterface {
     }
 
     @Override
-    public boolean updatePassword(String email, String newPassword) {
-        System.out.println("Password updated for email: " + email);
-        return true;
-    }
-
     public boolean changePassword(String userName, String oldPassword, String newPassword) {
-        System.out.println("Verifying old password for " + userName + "...");
+        System.out.println("Verifying old passworchangePasswordd for " + userName + "...");
         System.out.println("Password successfully changed for user: " + userName);
         return true; 
     }
