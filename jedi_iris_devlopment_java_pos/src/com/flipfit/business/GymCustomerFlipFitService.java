@@ -4,7 +4,7 @@ import com.flipfit.bean.Booking;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerFlipFitService implements CustomerFlipFitInterface {
+public class GymCustomerFlipFitService implements CustomerFlipFitInterface {
 
     @Override
     public boolean bookSlot(String bookingId, String slotId, String customerId) {
