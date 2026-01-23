@@ -15,14 +15,18 @@ public class UserFlipFitService implements UserFlipFitInterface {
     @Override
     public void registerCustomer(Customer customer) {
         System.out.println("Registering Customer: " + customer.getUserName());
-        // Logic to save customer to DB
+        // SHOW OFF LINE: accessing the Role object
+        System.out.println("Role: " + customer.getRole().getRoleName());
+        System.out.println("--------------------------------");
     }
 
     @Override
     public void registerGymOwner(GymOwner gymOwner) {
         System.out.println("Registering Gym Owner: " + gymOwner.getUserName());
+        // SHOW OFF LINE: accessing the Role object
+        System.out.println("Role: " + gymOwner.getRole().getRoleName());
         System.out.println("Status: Pending Approval");
-        // Logic to save gym owner to DB
+        System.out.println("--------------------------------");
     }
 
     @Override

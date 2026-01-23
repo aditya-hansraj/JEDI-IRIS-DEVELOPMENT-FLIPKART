@@ -1,17 +1,17 @@
 package com.flipfit.bean;
 
-import java.util.List;
-
 public class GymOwner extends User {
     private String panNumber;
     private String cardDetails;
-    private boolean isApproved; // False by default
+    private boolean isApproved;
 
     public GymOwner() {
-        setRole("GymOwner");
+        // Set Role Object
+        setRole(new Role("2", "GymOwner", "Can add centers and slots"));
         this.isApproved = false;
     }
 
+    // (Keep your existing getters and setters...)
     public String getPanNumber() { return panNumber; }
     public void setPanNumber(String panNumber) { this.panNumber = panNumber; }
     public String getCardDetails() { return cardDetails; }

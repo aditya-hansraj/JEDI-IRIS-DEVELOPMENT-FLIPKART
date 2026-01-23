@@ -5,11 +5,11 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private String role; // Role: "Customer", "GymOwner", "Admin"
+    private Role role; // <--- CHANGED: Now it is an Object of type Role
 
     public User() {}
 
-    public User(String userId, String userName, String email, String password, String role) {
+    public User(String userId, String userName, String email, String password, Role role) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -26,6 +26,8 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+
+    // Updated Getter/Setter for Role
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 }
