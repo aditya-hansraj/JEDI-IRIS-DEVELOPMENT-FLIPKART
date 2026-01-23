@@ -1,0 +1,11 @@
+---
+logging:
+  level: INFO
+  loggers:
+    com.flipfit: DEBUG
+
+database:
+  driverClass: org.h2.Driver
+  url: jdbc:h2:mem:flipfit;DB_CLOSE_DELAY=-1 # In-memory database, data wiped on restart
+  user: sa
+  password: sa
