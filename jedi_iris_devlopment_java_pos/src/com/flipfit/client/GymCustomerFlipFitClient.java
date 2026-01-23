@@ -1,11 +1,11 @@
 package com.flipfit.client;
 
-import com.flipfit.business.CustomerFlipFitService;
+import com.flipfit.business.GymCustomerFlipFitService;
 import java.util.Scanner;
 
-public class CustomerFlipFitClient {
+public class GymCustomerFlipFitClient {
 
-    CustomerFlipFitService customerService = new CustomerFlipFitService();
+    GymCustomerFlipFitService customerService = new GymCustomerFlipFitService();
 
     // CHANGE 1: Added 'String userId' to the parameters here
     public void customerMenu(Scanner scanner, String userId) {

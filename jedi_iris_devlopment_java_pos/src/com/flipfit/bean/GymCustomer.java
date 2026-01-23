@@ -1,10 +1,10 @@
 package com.flipfit.bean;
 
-public class Customer extends User {
+public class GymCustomer extends User {
     private String customerPhone;
     private String cardDetails;
 
-    public Customer() {
+    public GymCustomer() {
         // We set the Role Object here
         setRole(new Role("1", "Customer", "Can book gym slots"));
     }

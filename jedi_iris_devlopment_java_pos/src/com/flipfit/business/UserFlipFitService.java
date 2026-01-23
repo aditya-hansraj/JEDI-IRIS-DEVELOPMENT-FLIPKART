@@ -1,6 +1,6 @@
 package com.flipfit.business;
 
-import com.flipfit.bean.Customer;
+import com.flipfit.bean.GymCustomer;
 import com.flipfit.bean.GymOwner;
 
 public class UserFlipFitService implements UserFlipFitInterface {
@@ -13,10 +13,10 @@ public class UserFlipFitService implements UserFlipFitInterface {
     }
 
     @Override
-    public void registerCustomer(Customer customer) {
-        System.out.println("Registering Customer: " + customer.getUserName());
+    public void registerCustomer(GymCustomer gymCustomer) {
+        System.out.println("Registering Customer: " + gymCustomer.getUserName());
         // SHOW OFF LINE: accessing the Role object
-        System.out.println("Role: " + customer.getRole().getRoleName());
+        System.out.println("Role: " + gymCustomer.getRole().getRoleName());
         System.out.println("--------------------------------");
     }
 

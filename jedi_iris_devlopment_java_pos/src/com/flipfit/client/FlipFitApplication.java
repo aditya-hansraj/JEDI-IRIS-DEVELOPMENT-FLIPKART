@@ -1,7 +1,7 @@
 package com.flipfit.client;
 
 import com.flipfit.business.UserFlipFitService;
-import com.flipfit.bean.Customer;
+import com.flipfit.bean.GymCustomer;
 import com.flipfit.bean.GymOwner;
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class FlipFitApplication {
 
         // Instantiate the sub-clients
         AdminFlipFitClient adminClient = new AdminFlipFitClient();
-        CustomerFlipFitClient customerClient = new CustomerFlipFitClient();
+        GymCustomerFlipFitClient customerClient = new GymCustomerFlipFitClient();
         GymOwnerFlipFitClient ownerClient = new GymOwnerFlipFitClient();
 
         while (true) {
@@ -60,7 +60,7 @@ public class FlipFitApplication {
                     System.out.print("Enter Email: ");
                     String custEmail = scanner.next();
 
-                    Customer newCust = new Customer();
+                    GymCustomer newCust = new GymCustomer();
                     newCust.setUserName(custName);
                     newCust.setPassword(custPass);
                     newCust.setEmail(custEmail);
