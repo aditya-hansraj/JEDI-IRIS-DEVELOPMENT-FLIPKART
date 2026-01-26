@@ -29,6 +29,12 @@ public class UserResource {
         public Role role;
     }
 
+    // DTO for user login
+    public static class LoginRequest {
+        public String email;
+        public String password;
+    }
+
     @POST
     @Path("/register")
     public Response registerUser(RegisterUserRequest request) {
@@ -48,6 +54,25 @@ public class UserResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to register user.").build();
         }
     }
+
+    @POST
+    @Path("/signup")
+    public Response signupUser(RegisterUserRequest request) {
+        return registerUser(request);
+    }
+
+    @POST
+    @Path("/login")
+    public Response loginUser(LoginRequest request) {
+        if (request.email == null || request.password == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Email and password are required.").build();
+        }
+
+        boolean loginSuccess = userService.loginUser(request.email, request.password);
+
+        return Response.ok(loginSuccess).build();
+    }
+
 
     @GET
     @Path("/{id}")
