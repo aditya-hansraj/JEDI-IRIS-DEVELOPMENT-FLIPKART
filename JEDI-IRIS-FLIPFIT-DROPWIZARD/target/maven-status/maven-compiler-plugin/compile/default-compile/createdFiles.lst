@@ -13,6 +13,7 @@ com/flipfit/service/WaitListService.class
 com/flipfit/service/PaymentService.class
 com/flipfit/resources/PaymentResource.class
 com/flipfit/core/Center.class
+com/flipfit/resources/UserResource$LoginRequest.class
 com/flipfit/service/BookingService.class
 com/flipfit/service/UserService.class
 com/flipfit/db/mapper/RoleArgumentFactory.class
