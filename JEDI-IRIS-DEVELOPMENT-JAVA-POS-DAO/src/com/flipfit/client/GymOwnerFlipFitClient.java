@@ -28,6 +28,7 @@ public class GymOwnerFlipFitClient {
             System.out.println("4. Logout");
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline left after nextInt
 
             switch (choice) {
                 case 1:
@@ -35,14 +36,17 @@ public class GymOwnerFlipFitClient {
                     break;
                 case 2:
                     System.out.print("Enter Centre Name: ");
-                    String name = scanner.next();
+                    String name = scanner.nextLine();
                     System.out.print("Enter City: ");
-                    String city = scanner.next();
+                    String city = scanner.nextLine();
+                    System.out.print("Enter Pincode: ");
+                    String pincode = scanner.nextLine();
 
                     GymCentre newCentre = new GymCentre();
                     newCentre.setCentreId(UUID.randomUUID().toString().substring(0, 8)); // Generate random ID
                     newCentre.setCentreName(name);
                     newCentre.setCity(city);
+                    newCentre.setPincode(pincode);
                     newCentre.setOwnerId(ownerId);
                     newCentre.setApproved(false);
 
@@ -54,9 +58,9 @@ public class GymOwnerFlipFitClient {
                     break;
                 case 3:
                     System.out.print("Enter Centre ID: ");
-                    String centreId = scanner.next();
+                    String centreId = scanner.nextLine();
                     System.out.print("Enter Slot Time: ");
-                    String time = scanner.next();
+                    String time = scanner.nextLine();
 
                     Slots newSlot = new Slots();
                     newSlot.setSlotId(UUID.randomUUID().toString().substring(0, 8));

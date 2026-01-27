@@ -51,6 +51,7 @@ public class GymOwnerFlipFitService implements GymOwnerFlipFitInterface {
             throw new RegistrationNotDoneException("Failed to save slot for centre: " + slot.getCentreId(), ex);
         }
         System.out.println("Slot added to Centre ID: " + slot.getCentreId());
+        System.out.println("Slot ID: " + slot.getSlotId());
     }
 
     @Override

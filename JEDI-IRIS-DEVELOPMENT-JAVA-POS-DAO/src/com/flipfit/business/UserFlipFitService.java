@@ -25,12 +25,12 @@ public class UserFlipFitService implements UserFlipFitInterface {
      *
      * @param userName the user name
      * @param password the password
-     * @return true, if successful
+    * @return the authenticated user
      * @throws UserNotFoundException the user not found exception
      * @throws ApprovalPendingException the approval pending exception
      */
     @Override
-    public boolean login(String userName, String password) throws UserNotFoundException, ApprovalPendingException {
+    public User login(String userName, String password) throws UserNotFoundException, ApprovalPendingException {
         Optional<User> user = userDAO.findByCredentials(userName, password);
         if (user.isEmpty()) {
             throw new UserNotFoundException("Invalid Credentials for user: " + userName);
@@ -43,7 +43,7 @@ public class UserFlipFitService implements UserFlipFitInterface {
             }
         }
         System.out.println("Login Successful! Welcome " + userName);
-        return true;
+        return user.get();
     }
 
     /**

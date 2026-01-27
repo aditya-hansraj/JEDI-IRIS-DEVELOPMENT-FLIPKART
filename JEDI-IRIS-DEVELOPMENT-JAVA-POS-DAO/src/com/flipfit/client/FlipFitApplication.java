@@ -1,8 +1,9 @@
 package com.flipfit.client;
 
-import com.flipfit.business.UserFlipFitService;
 import com.flipfit.bean.GymCustomer;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.User;
+import com.flipfit.business.UserFlipFitService;
 import com.flipfit.exception.ApprovalPendingException;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
@@ -43,21 +44,18 @@ public class FlipFitApplication {
                     String user = scanner.next();  // <--- You capture the username here
                     System.out.print("Enter Password: ");
                     String pass = scanner.next();
-                    System.out.print("Enter Role (Admin/Customer/GymOwner): ");
-                    String role = scanner.next();
-
                     try {
-                        if (userService.login(user, pass)) {
-                            if (role.equalsIgnoreCase("Admin")) {
-                                adminClient.adminMenu(scanner);
-                            } else if (role.equalsIgnoreCase("Customer")) {
-                                customerClient.customerMenu(scanner, user);
-                            } else if (role.equalsIgnoreCase("GymOwner")) {
-                                ownerClient.gymOwnerMenu(scanner, user);
-                                // -------------------
-                            } else {
-                                System.out.println("Invalid Role Selected.");
-                            }
+                        User loggedInUser = userService.login(user, pass);
+                        String resolvedRole = resolveRole(loggedInUser);
+
+                        if ("Admin".equalsIgnoreCase(resolvedRole)) {
+                            adminClient.adminMenu(scanner);
+                        } else if ("GymCustomer".equalsIgnoreCase(resolvedRole) || "Customer".equalsIgnoreCase(resolvedRole)) {
+                            customerClient.customerMenu(scanner, loggedInUser.getUserName());
+                        } else if ("GymOwner".equalsIgnoreCase(resolvedRole)) {
+                            ownerClient.gymOwnerMenu(scanner, loggedInUser.getUserName());
+                        } else {
+                            System.out.println("Unable to determine role for the user. Please contact support.");
                         }
                     } catch (UserNotFoundException | ApprovalPendingException e) {
                         System.out.println(e.getMessage());
@@ -134,5 +132,21 @@ public class FlipFitApplication {
                     System.out.println("Invalid choice. Try again.");
             }
         }
+    }
+
+    private static String resolveRole(User user) {
+        if (user == null) {
+            return "";
+        }
+        if (user instanceof GymOwner) {
+            return "GymOwner";
+        }
+        if (user instanceof GymCustomer) {
+            return "GymCustomer";
+        }
+        if (user.getRole() != null && user.getRole().getRoleName() != null) {
+            return user.getRole().getRoleName();
+        }
+        return "";
     }
 }
