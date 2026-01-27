@@ -5,3 +5,5 @@ out/
 =======
 *.idea*
 >>>>>>> 1acf340 (update gitignore)
+
+*/bin/*

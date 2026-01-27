@@ -1,11 +1,12 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.Booking;
-import com.flipfit.bean.FlipFitMockDB;
+import com.flipfit.dao.BookingDAO;
+import com.flipfit.dao.BookingDAOImpl;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
+    private final BookingDAO bookingDAO = new BookingDAOImpl();
 
     @Override
     public boolean bookSlot(String bookingId, String slotId, String customerId) {
@@ -15,14 +16,14 @@ public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
         newBooking.setUserId(customerId);
         newBooking.setStatus("Confirmed");
 
-        FlipFitMockDB.bookings.add(newBooking);
+        bookingDAO.save(newBooking);
         System.out.println("Success: Slot " + slotId + " booked! Booking ID: " + bookingId);
         return true;
     }
 
     @Override
     public boolean cancelBooking(String bookingId) {
-        boolean removed = FlipFitMockDB.bookings.removeIf(b -> b.getBookingId().equals(bookingId));
+        boolean removed = bookingDAO.delete(bookingId);
         if (removed) {
             System.out.println("Booking " + bookingId + " cancelled successfully.");
             return true;
@@ -34,10 +35,7 @@ public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
 
     @Override
     public List<Booking> getMyBookings(String customerId) {
-        List<Booking> myBookings = FlipFitMockDB.bookings.stream()
-                .filter(b -> b.getUserId().equals(customerId))
-                .collect(Collectors.toList());
-
+        List<Booking> myBookings = bookingDAO.findByUser(customerId);
         if (myBookings.isEmpty()) {
             System.out.println("You have no bookings.");
         } else {
