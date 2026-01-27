@@ -1,0 +1,18 @@
+package com.flipfit.exception;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BookingNotDoneException.
+ *
+ * @author AI
+ * @ClassName "BookingNotDoneException"
+ */
+public class BookingNotDoneException extends Exception {
+    public BookingNotDoneException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BookingNotDoneException(String message) {
+        super(message);
+    }
+}

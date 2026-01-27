@@ -3,9 +3,17 @@ package com.flipfit.client;
 import com.flipfit.business.GymOwnerFlipFitService;
 import com.flipfit.bean.GymCentre;
 import com.flipfit.bean.Slots;
+import com.flipfit.exception.RegistrationNotDoneException;
 import java.util.Scanner;
 import java.util.UUID;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GymOwnerFlipFitClient.
+ *
+ * @author AI
+ * @ClassName "GymOwnerFlipFitClient"
+ */
 public class GymOwnerFlipFitClient {
 
     GymOwnerFlipFitService ownerService = new GymOwnerFlipFitService();
@@ -38,7 +46,11 @@ public class GymOwnerFlipFitClient {
                     newCentre.setOwnerId(ownerId);
                     newCentre.setApproved(false);
 
-                    ownerService.addCentre(newCentre);
+                    try {
+                        ownerService.addCentre(newCentre);
+                    } catch (RegistrationNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.print("Enter Centre ID: ");
@@ -51,7 +63,11 @@ public class GymOwnerFlipFitClient {
                     newSlot.setCentreId(centreId);
                     newSlot.setStartTime(time);
 
-                    ownerService.addSlot(newSlot);
+                    try {
+                        ownerService.addSlot(newSlot);
+                    } catch (RegistrationNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
                     System.out.println("Logging out...");

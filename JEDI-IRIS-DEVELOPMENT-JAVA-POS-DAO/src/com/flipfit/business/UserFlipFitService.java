@@ -5,47 +5,93 @@ import com.flipfit.bean.GymOwner;
 import com.flipfit.bean.User;
 import com.flipfit.dao.UserDAO;
 import com.flipfit.dao.UserDAOImpl;
+import com.flipfit.exception.ApprovalPendingException;
+import com.flipfit.exception.RegistrationNotDoneException;
+import com.flipfit.exception.UserNotFoundException;
 import java.util.Optional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserFlipFitService.
+ *
+ * @author AI
+ * @ClassName "UserFlipFitService"
+ */
 public class UserFlipFitService implements UserFlipFitInterface {
     private final UserDAO userDAO = new UserDAOImpl();
 
+    /**
+     * Login user.
+     *
+     * @param userName the user name
+     * @param password the password
+     * @return true, if successful
+     * @throws UserNotFoundException the user not found exception
+     * @throws ApprovalPendingException the approval pending exception
+     */
     @Override
-    public boolean login(String userName, String password) {
+    public boolean login(String userName, String password) throws UserNotFoundException, ApprovalPendingException {
         Optional<User> user = userDAO.findByCredentials(userName, password);
         if (user.isEmpty()) {
-            System.out.println("Invalid Credentials.");
-            return false;
+            throw new UserNotFoundException("Invalid Credentials for user: " + userName);
         }
 
         if (user.get() instanceof GymOwner) {
             GymOwner owner = (GymOwner) user.get();
             if (!owner.isApproved()) {
-                System.out.println("Login Failed: Your account is not yet approved by Admin.");
-                return false;
+                throw new ApprovalPendingException("Login Failed: Your account is not yet approved by Admin.");
             }
         }
         System.out.println("Login Successful! Welcome " + userName);
         return true;
     }
 
+    /**
+     * Register customer.
+     *
+     * @param gymCustomer the gym customer
+     * @throws RegistrationNotDoneException the registration not done exception
+     */
     @Override
-    public void registerCustomer(GymCustomer gymCustomer) {
+    public void registerCustomer(GymCustomer gymCustomer) throws RegistrationNotDoneException {
         ensureUserId(gymCustomer);
-        userDAO.saveCustomer(gymCustomer);
+        try {
+            userDAO.saveCustomer(gymCustomer);
+        } catch (Exception ex) {
+            throw new RegistrationNotDoneException("Customer registration failed for user: " + gymCustomer.getUserName(), ex);
+        }
         System.out.println("Success: Customer " + gymCustomer.getUserName() + " registered!");
     }
 
+    /**
+     * Register gym owner.
+     *
+     * @param gymOwner the gym owner
+     * @throws RegistrationNotDoneException the registration not done exception
+     */
     @Override
-    public void registerGymOwner(GymOwner gymOwner) {
+    public void registerGymOwner(GymOwner gymOwner) throws RegistrationNotDoneException {
         ensureUserId(gymOwner);
-        userDAO.saveOwner(gymOwner);
+        try {
+            userDAO.saveOwner(gymOwner);
+        } catch (Exception ex) {
+            throw new RegistrationNotDoneException("Gym owner registration failed for user: " + gymOwner.getUserName(), ex);
+        }
         System.out.println("Success: Gym Owner " + gymOwner.getUserName() + " registered!");
         System.out.println("Status: PENDING APPROVAL (You cannot login yet)");
     }
 
+    /**
+     * Change password.
+     *
+     * @param userName the user name
+     * @param oldPassword the old password
+     * @param newPassword the new password
+     * @return true, if successful
+     * @throws UserNotFoundException the user not found exception
+     */
     @Override
-    public boolean changePassword(String userName, String oldPassword, String newPassword) {
+    public boolean changePassword(String userName, String oldPassword, String newPassword) throws UserNotFoundException {
         boolean updated = userDAO.changePassword(userName, oldPassword, newPassword);
         if (updated) {
             System.out.println("--------------------------------");
@@ -53,8 +99,7 @@ public class UserFlipFitService implements UserFlipFitInterface {
             System.out.println("--------------------------------");
             return true;
         }
-        System.out.println("Error: The old password you entered is incorrect or user not found.");
-        return false;
+        throw new UserNotFoundException("The old password is incorrect or user not found for: " + userName);
     }
 
     private void ensureUserId(User user) {

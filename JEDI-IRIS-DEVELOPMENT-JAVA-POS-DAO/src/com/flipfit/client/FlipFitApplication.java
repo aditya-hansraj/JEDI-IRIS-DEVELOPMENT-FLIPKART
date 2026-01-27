@@ -3,8 +3,18 @@ package com.flipfit.client;
 import com.flipfit.business.UserFlipFitService;
 import com.flipfit.bean.GymCustomer;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.exception.ApprovalPendingException;
+import com.flipfit.exception.RegistrationNotDoneException;
+import com.flipfit.exception.UserNotFoundException;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FlipFitApplication.
+ *
+ * @author AI
+ * @ClassName "FlipFitApplication"
+ */
 public class FlipFitApplication {
 
     public static void main(String[] args) {
@@ -36,17 +46,21 @@ public class FlipFitApplication {
                     System.out.print("Enter Role (Admin/Customer/GymOwner): ");
                     String role = scanner.next();
 
-                    if (userService.login(user, pass)) {
-                        if (role.equalsIgnoreCase("Admin")) {
-                            adminClient.adminMenu(scanner);
-                        } else if (role.equalsIgnoreCase("Customer")) {
-                            customerClient.customerMenu(scanner, user);
-                        } else if (role.equalsIgnoreCase("GymOwner")) {
-                            ownerClient.gymOwnerMenu(scanner, user);
-                            // -------------------
-                        } else {
-                            System.out.println("Invalid Role Selected.");
+                    try {
+                        if (userService.login(user, pass)) {
+                            if (role.equalsIgnoreCase("Admin")) {
+                                adminClient.adminMenu(scanner);
+                            } else if (role.equalsIgnoreCase("Customer")) {
+                                customerClient.customerMenu(scanner, user);
+                            } else if (role.equalsIgnoreCase("GymOwner")) {
+                                ownerClient.gymOwnerMenu(scanner, user);
+                                // -------------------
+                            } else {
+                                System.out.println("Invalid Role Selected.");
+                            }
                         }
+                    } catch (UserNotFoundException | ApprovalPendingException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
@@ -64,7 +78,11 @@ public class FlipFitApplication {
                     newCust.setPassword(custPass);
                     newCust.setEmail(custEmail);
 
-                    userService.registerCustomer(newCust);
+                    try {
+                        userService.registerCustomer(newCust);
+                    } catch (RegistrationNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 3:
@@ -81,7 +99,11 @@ public class FlipFitApplication {
                     newOwner.setPassword(ownerPass);
                     newOwner.setEmail(ownerEmail);
 
-                    userService.registerGymOwner(newOwner);
+                    try {
+                        userService.registerGymOwner(newOwner);
+                    } catch (RegistrationNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 4:
@@ -93,11 +115,13 @@ public class FlipFitApplication {
                     System.out.print("Enter New Password: ");
                     String newPass = scanner.next();
                     
-                    boolean isChanged = userService.changePassword(userName, oldPass, newPass);
-                    if (isChanged) {
-                        System.out.println("Password changed successfully!");
-                    } else {
-                        System.out.println("Failed to change password. Please check your credentials.");
+                    try {
+                        boolean isChanged = userService.changePassword(userName, oldPass, newPass);
+                        if (isChanged) {
+                            System.out.println("Password changed successfully!");
+                        }
+                    } catch (UserNotFoundException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 

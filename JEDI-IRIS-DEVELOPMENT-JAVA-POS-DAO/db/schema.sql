@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(128) NOT NULL,
     role_name VARCHAR(32) NOT NULL,
     pan_number VARCHAR(32),
-    card_details VARCHAR(64
+    card_details VARCHAR(64),
     is_approved TINYINT(1) NOT NULL DEFAULT 0
 );
 

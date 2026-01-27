@@ -6,22 +6,50 @@ import com.flipfit.dao.GymCentreDAO;
 import com.flipfit.dao.GymCentreDAOImpl;
 import com.flipfit.dao.SlotDAO;
 import com.flipfit.dao.SlotDAOImpl;
+import com.flipfit.exception.RegistrationNotDoneException;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GymOwnerFlipFitService.
+ *
+ * @author AI
+ * @ClassName "GymOwnerFlipFitService"
+ */
 public class GymOwnerFlipFitService implements GymOwnerFlipFitInterface {
     private final GymCentreDAO gymCentreDAO = new GymCentreDAOImpl();
     private final SlotDAO slotDAO = new SlotDAOImpl();
 
+    /**
+     * Adds the centre.
+     *
+     * @param centre the centre
+     * @throws RegistrationNotDoneException the registration not done exception
+     */
     @Override
-    public void addCentre(GymCentre centre) {
-        gymCentreDAO.save(centre);
+    public void addCentre(GymCentre centre) throws RegistrationNotDoneException {
+        try {
+            gymCentreDAO.save(centre);
+        } catch (Exception ex) {
+            throw new RegistrationNotDoneException("Failed to save gym centre: " + centre.getCentreName(), ex);
+        }
         System.out.println("Gym Centre added successfully: " + centre.getCentreName());
         System.out.println("Note: Admin approval required before customers can see it.");
     }
 
+    /**
+     * Adds the slot.
+     *
+     * @param slot the slot
+     * @throws RegistrationNotDoneException the registration not done exception
+     */
     @Override
-    public void addSlot(Slots slot) {
-        slotDAO.save(slot);
+    public void addSlot(Slots slot) throws RegistrationNotDoneException {
+        try {
+            slotDAO.save(slot);
+        } catch (Exception ex) {
+            throw new RegistrationNotDoneException("Failed to save slot for centre: " + slot.getCentreId(), ex);
+        }
         System.out.println("Slot added to Centre ID: " + slot.getCentreId());
     }
 

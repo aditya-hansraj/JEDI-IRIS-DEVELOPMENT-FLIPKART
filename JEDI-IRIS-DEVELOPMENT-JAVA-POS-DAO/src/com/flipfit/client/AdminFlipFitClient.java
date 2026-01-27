@@ -3,9 +3,17 @@ package com.flipfit.client;
 import com.flipfit.business.AdminFlipFitService;
 import com.flipfit.bean.GymOwner;
 import com.flipfit.bean.GymCentre;
+import com.flipfit.exception.ApprovalNotDoneException;
 import java.util.List;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminFlipFitClient.
+ *
+ * @author AI
+ * @ClassName "AdminFlipFitClient"
+ */
 public class AdminFlipFitClient {
 
     AdminFlipFitService adminService = new AdminFlipFitService();
@@ -40,7 +48,11 @@ public class AdminFlipFitClient {
                 case 2:
                     System.out.print("\nEnter Gym Owner Username to Approve: ");
                     String ownerName = scanner.next();
-                    adminService.approveGymOwner(ownerName, true);
+                    try {
+                        adminService.approveGymOwner(ownerName, true);
+                    } catch (ApprovalNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 3:
@@ -61,7 +73,11 @@ public class AdminFlipFitClient {
                 case 4:
                     System.out.print("\nEnter Centre ID to Approve: ");
                     String centreId = scanner.next();
-                    adminService.approveGymCentre(centreId, true);
+                    try {
+                        adminService.approveGymCentre(centreId, true);
+                    } catch (ApprovalNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 5:

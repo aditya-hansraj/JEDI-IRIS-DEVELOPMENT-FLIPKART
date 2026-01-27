@@ -1,8 +1,17 @@
 package com.flipfit.client;
 
 import com.flipfit.business.GymCustomerFlipFitService;
+import com.flipfit.exception.BookingNotDoneException;
+import com.flipfit.exception.SlotNotAvailableException;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GymCustomerFlipFitClient.
+ *
+ * @author AI
+ * @ClassName "GymCustomerFlipFitClient"
+ */
 public class GymCustomerFlipFitClient {
 
     GymCustomerFlipFitService customerService = new GymCustomerFlipFitService();
@@ -27,12 +36,20 @@ public class GymCustomerFlipFitClient {
                     System.out.print("Enter Slot ID: ");
                     String slotId = scanner.next();
                     // CHANGE 3: Passed the real userId
-                    customerService.bookSlot("NewBookingId", slotId, userId);
+                    try {
+                        customerService.bookSlot("NewBookingId", slotId, userId);
+                    } catch (SlotNotAvailableException | BookingNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.print("Enter Booking ID: ");
                     String bookingId = scanner.next();
-                    customerService.cancelBooking(bookingId);
+                    try {
+                        customerService.cancelBooking(bookingId);
+                    } catch (BookingNotDoneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
                     System.out.println("Logging out...");
