@@ -1,11 +1,9 @@
 package com.flipfit.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class RegistrationNotDoneException.
+ * Thrown when a user or centre registration cannot be completed.
  *
  * @author aditya-hansraj
- * @ClassName "RegistrationNotDoneException"
  */
 public class RegistrationNotDoneException extends Exception {
     public RegistrationNotDoneException(String message, Throwable cause) {

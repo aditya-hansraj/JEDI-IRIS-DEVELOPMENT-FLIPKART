@@ -1,11 +1,9 @@
 package com.flipfit.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class UserNotFoundException.
+ * Thrown when a requested user cannot be located in the system.
  *
  * @author aditya-hansraj
- * @ClassName "UserNotFoundException"
  */
 public class UserNotFoundException extends Exception {
     public UserNotFoundException(String message) {

@@ -1,11 +1,10 @@
 package com.flipfit.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ApprovalPendingException.
+ * Thrown when a user attempts an operation while their account
+ * is still awaiting administrative approval.
  *
  * @author aditya-hansraj
- * @ClassName "ApprovalPendingException"
  */
 public class ApprovalPendingException extends Exception {
     public ApprovalPendingException(String message) {

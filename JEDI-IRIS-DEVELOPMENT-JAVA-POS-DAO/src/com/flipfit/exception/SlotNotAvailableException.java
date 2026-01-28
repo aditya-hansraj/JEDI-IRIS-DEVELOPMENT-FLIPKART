@@ -1,11 +1,9 @@
 package com.flipfit.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SlotNotAvailableException.
+ * Thrown when a requested booking slot is unavailable.
  *
  * @author aditya-hansraj
- * @ClassName "SlotNotAvailableException"
  */
 public class SlotNotAvailableException extends Exception {
     public SlotNotAvailableException(String message) {

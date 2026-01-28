@@ -1,5 +1,13 @@
 package com.flipfit.bean;
 
+/**
+ * Domain model representing a physical gym centre in FlipFit.
+ *
+ * <p>Holds identifying details, location metadata and an approval
+ * flag used to control visibility to customers.</p>
+ *
+ * @author aditya-hansraj
+ */
 public class GymCentre {
     private String centreId;
     private String ownerId;
