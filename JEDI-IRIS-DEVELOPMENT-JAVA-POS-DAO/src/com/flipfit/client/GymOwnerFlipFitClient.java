@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GymOwnerFlipFitClient.
+ * Console client for gym owner operations.
  *
- * @author AI
- * @ClassName "GymOwnerFlipFitClient"
+ * <p>Provides a menu for owners to manage their centres and
+ * slots through {@link GymOwnerFlipFitService}.</p>
+ *
+ * @author aditya-hansraj
  */
 public class GymOwnerFlipFitClient {
 

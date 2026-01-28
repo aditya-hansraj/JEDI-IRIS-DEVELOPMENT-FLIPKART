@@ -1,5 +1,13 @@
 package com.flipfit.config;
 
+/**
+ * Central configuration for FlipFit database connectivity.
+ *
+ * <p>Holds JDBC URL and credentials used by the DAO layer to
+ * establish connections to the backing MySQL schema.</p>
+ *
+ * @author aditya-hansraj
+ */
 public final class DatabaseConfig {
     private DatabaseConfig() {
     }

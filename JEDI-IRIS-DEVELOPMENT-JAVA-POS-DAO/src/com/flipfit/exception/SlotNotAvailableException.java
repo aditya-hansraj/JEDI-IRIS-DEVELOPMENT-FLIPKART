@@ -4,7 +4,7 @@ package com.flipfit.exception;
 /**
  * The Class SlotNotAvailableException.
  *
- * @author AI
+ * @author aditya-hansraj
  * @ClassName "SlotNotAvailableException"
  */
 public class SlotNotAvailableException extends Exception {

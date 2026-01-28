@@ -9,12 +9,13 @@ import com.flipfit.dao.SlotDAOImpl;
 import com.flipfit.exception.RegistrationNotDoneException;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GymOwnerFlipFitService.
+ * Service implementation of {@link GymOwnerFlipFitInterface}.
  *
- * @author AI
- * @ClassName "GymOwnerFlipFitService"
+ * <p>Provides operations for gym owners to manage centres and
+ * slots, delegating persistence to the corresponding DAOs.</p>
+ *
+ * @author aditya-hansraj
  */
 public class GymOwnerFlipFitService implements GymOwnerFlipFitInterface {
     private final GymCentreDAO gymCentreDAO = new GymCentreDAOImpl();

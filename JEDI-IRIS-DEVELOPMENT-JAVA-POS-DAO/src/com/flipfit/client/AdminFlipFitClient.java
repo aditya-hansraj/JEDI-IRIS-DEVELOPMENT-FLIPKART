@@ -7,12 +7,13 @@ import com.flipfit.exception.ApprovalNotDoneException;
 import java.util.List;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AdminFlipFitClient.
+ * Console client for administrative workflows.
  *
- * @author AI
- * @ClassName "AdminFlipFitClient"
+ * <p>Presents a menu for admins to view and approve pending gym
+ * owners and centres via {@link AdminFlipFitService}.</p>
+ *
+ * @author aditya-hansraj
  */
 public class AdminFlipFitClient {
 

@@ -9,12 +9,13 @@ import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class FlipFitApplication.
+ * Entry point for the FlipFit gym management console application.
  *
- * @author AI
- * @ClassName "FlipFitApplication"
+ * <p>This class presents the top-level menu for users to log in,
+ * register as customers or gym owners, and manage credentials.</p>
+ *
+ * @author aditya-hansraj
  */
 public class FlipFitApplication {
 

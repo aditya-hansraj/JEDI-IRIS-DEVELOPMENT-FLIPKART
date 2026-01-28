@@ -13,12 +13,13 @@ import com.flipfit.exception.BookingNotDoneException;
 import com.flipfit.exception.SlotNotAvailableException;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GymCustomerFlipFitService.
+ * Service implementation of {@link GymCustomerFlipFitInterface} for customers.
  *
- * @author AI
- * @ClassName "GymCustomerFlipFitService"
+ * <p>This class coordinates DAOs to let customers browse centres and slots,
+ * book or cancel bookings, and view their booking history.</p>
+ *
+ * @author aditya-hansraj
  */
 public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
     private final BookingDAO bookingDAO = new BookingDAOImpl();

@@ -1,5 +1,13 @@
 package com.flipfit.bean;
 
+/**
+ * Domain model representing a FlipFit platform user.
+ *
+ * <p>A user encapsulates credentials, contact information, and the
+ * associated {@link Role} that drives authorization within the system.</p>
+ *
+ * @author diya-kailash
+ */
 public class User {
     private String userId;
     private String userName;

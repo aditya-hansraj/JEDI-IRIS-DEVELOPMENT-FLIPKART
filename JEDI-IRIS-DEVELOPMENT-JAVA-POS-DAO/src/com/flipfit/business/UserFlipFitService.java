@@ -13,12 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class UserFlipFitService.
+ * Service implementation of {@link UserFlipFitInterface}.
  *
- * @author AI
- * @ClassName "UserFlipFitService"
+ * <p>Coordinates user registration, authentication, and password
+ * management using the underlying {@link UserDAO}.</p>
+ *
+ * @author aditya-hansraj
  */
 public class UserFlipFitService implements UserFlipFitInterface {
     private final UserDAO userDAO = new UserDAOImpl();

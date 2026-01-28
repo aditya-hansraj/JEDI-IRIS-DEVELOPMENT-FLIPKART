@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GymCustomerFlipFitClient.
+ * Console client for gym customer interactions.
  *
- * @author AI
- * @ClassName "GymCustomerFlipFitClient"
+ * <p>Allows customers to view bookings, browse centres and slots,
+ * and perform booking and cancellation operations using
+ * {@link GymCustomerFlipFitService}.</p>
+ *
+ * @author aditya-hansraj
  */
 public class GymCustomerFlipFitClient {
 

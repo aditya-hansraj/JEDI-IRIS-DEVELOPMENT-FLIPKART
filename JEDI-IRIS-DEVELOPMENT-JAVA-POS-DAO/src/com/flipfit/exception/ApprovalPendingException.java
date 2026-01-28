@@ -4,7 +4,7 @@ package com.flipfit.exception;
 /**
  * The Class ApprovalPendingException.
  *
- * @author AI
+ * @author aditya-hansraj
  * @ClassName "ApprovalPendingException"
  */
 public class ApprovalPendingException extends Exception {

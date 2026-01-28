@@ -9,12 +9,13 @@ import com.flipfit.dao.UserDAOImpl;
 import com.flipfit.exception.ApprovalNotDoneException;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AdminFlipFitService.
+ * Service implementation of {@link AdminFlipFitInterface}.
  *
- * @author AI
- * @ClassName "AdminFlipFitService"
+ * <p>Handles approval workflows for gym owners and gym centres by
+ * delegating to the appropriate DAOs.</p>
+ *
+ * @author aditya-hansraj
  */
 public class AdminFlipFitService implements AdminFlipFitInterface {
     private final UserDAO userDAO = new UserDAOImpl();

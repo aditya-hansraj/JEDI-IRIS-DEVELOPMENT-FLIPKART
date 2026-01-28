@@ -4,7 +4,7 @@ package com.flipfit.exception;
 /**
  * The Class ApprovalNotDoneException.
  *
- * @author AI
+ * @author aditya-hansraj
  * @ClassName "ApprovalNotDoneException"
  */
 public class ApprovalNotDoneException extends Exception {
