@@ -1,9 +1,13 @@
 package com.flipfit.client;
 
+import com.flipfit.bean.GymCentre;
+import com.flipfit.bean.Slots;
 import com.flipfit.business.GymCustomerFlipFitService;
 import com.flipfit.exception.BookingNotDoneException;
 import com.flipfit.exception.SlotNotAvailableException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,20 +37,32 @@ public class GymCustomerFlipFitClient {
                     customerService.getMyBookings(userId);
                     break;
                 case 2:
+                    List<GymCentre> centres = customerService.getApprovedCentres();
+                    if (centres.isEmpty()) {
+                        break;
+                    }
+                    System.out.print("Enter Centre ID: ");
+                    String centreId = scanner.next();
+
+                    List<Slots> slots = customerService.getSlotsForCentre(centreId);
+                    if (slots.isEmpty()) {
+                        break;
+                    }
+
                     System.out.print("Enter Slot ID: ");
                     String slotId = scanner.next();
-                    // CHANGE 3: Passed the real userId
+                    String bookingId = UUID.randomUUID().toString().substring(0, 8);
                     try {
-                        customerService.bookSlot("NewBookingId", slotId, userId);
+                        customerService.bookSlot(bookingId, slotId, userId);
                     } catch (SlotNotAvailableException | BookingNotDoneException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 3:
                     System.out.print("Enter Booking ID: ");
-                    String bookingId = scanner.next();
+                    String cancelBookingId = scanner.next();
                     try {
-                        customerService.cancelBooking(bookingId);
+                        customerService.cancelBooking(cancelBookingId);
                     } catch (BookingNotDoneException e) {
                         System.out.println(e.getMessage());
                     }
