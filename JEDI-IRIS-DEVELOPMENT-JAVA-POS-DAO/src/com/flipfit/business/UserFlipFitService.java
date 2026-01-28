@@ -8,6 +8,9 @@ import com.flipfit.dao.UserDAOImpl;
 import com.flipfit.exception.ApprovalPendingException;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 // TODO: Auto-generated Javadoc
@@ -31,6 +34,8 @@ public class UserFlipFitService implements UserFlipFitInterface {
      */
     @Override
     public User login(String userName, String password) throws UserNotFoundException, ApprovalPendingException {
+    	LocalDate localDate=LocalDate.now();
+		LocalTime localTime=LocalTime.now();
         Optional<User> user = userDAO.findByCredentials(userName, password);
         if (user.isEmpty()) {
             throw new UserNotFoundException("Invalid Credentials for user: " + userName);
@@ -42,7 +47,7 @@ public class UserFlipFitService implements UserFlipFitInterface {
                 throw new ApprovalPendingException("Login Failed: Your account is not yet approved by Admin.");
             }
         }
-        System.out.println("Login Successful! Welcome " + userName);
+        System.out.printf("Login Successful! Welcome " + userName + "%50s%n" + "Logged in at Date: " + localDate + " Time: " + localTime);
         return user.get();
     }
 
