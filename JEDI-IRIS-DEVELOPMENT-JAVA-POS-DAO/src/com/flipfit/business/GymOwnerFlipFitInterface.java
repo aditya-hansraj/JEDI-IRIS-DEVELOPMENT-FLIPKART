@@ -2,7 +2,6 @@ package com.flipfit.business;
 
 import com.flipfit.bean.GymCentre;
 import com.flipfit.bean.Slots;
-import com.flipfit.exception.ApprovalNotDoneException;
 import com.flipfit.exception.RegistrationNotDoneException;
 import java.util.List;
 

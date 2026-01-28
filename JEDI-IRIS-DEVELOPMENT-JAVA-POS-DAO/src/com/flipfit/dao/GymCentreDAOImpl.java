@@ -134,4 +134,27 @@ public class GymCentreDAOImpl implements GymCentreDAO {
             throw new IllegalStateException("Failed to fetch centre details", e);
         }
     }
+
+    @Override
+    public List<GymCentre> findAllCentres() {
+        String sql = "SELECT centre_id, owner_id, centre_name, city, pincode, is_approved FROM gym_centres";
+        List<GymCentre> centres = new ArrayList<>();
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                GymCentre centre = new GymCentre();
+                centre.setCentreId(rs.getString("centre_id"));
+                centre.setOwnerId(rs.getString("owner_id"));
+                centre.setCentreName(rs.getString("centre_name"));
+                centre.setCity(rs.getString("city"));
+                centre.setPincode(rs.getString("pincode"));
+                centre.setApproved(rs.getBoolean("is_approved"));
+                centres.add(centre);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Failed to fetch all centres", e);
+        }
+        return centres;
+    }
 }

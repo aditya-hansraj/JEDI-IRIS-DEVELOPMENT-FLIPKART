@@ -48,7 +48,7 @@ public class UserFlipFitService implements UserFlipFitInterface {
                 throw new ApprovalPendingException("Login Failed: Your account is not yet approved by Admin.");
             }
         }
-        System.out.printf("Login Successful! Welcome " + userName + "%50s%n" + "Logged in at Date: " + localDate + " Time: " + localTime);
+        System.out.println("Login Successful! Welcome " + userName);
         return user.get();
     }
 

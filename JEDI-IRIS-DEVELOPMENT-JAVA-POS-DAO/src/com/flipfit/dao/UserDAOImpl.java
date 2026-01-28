@@ -135,4 +135,28 @@ public class UserDAOImpl implements UserDAO {
         }
         return pending;
     }
+
+    @Override
+    public List<GymOwner> findAllOwners() {
+        String sql = "SELECT user_id, user_name, email, password, pan_number, card_details, is_approved FROM users WHERE role_name = 'GymOwner'";
+        List<GymOwner> owners = new ArrayList<>();
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                GymOwner owner = new GymOwner();
+                owner.setUserId(rs.getString("user_id"));
+                owner.setUserName(rs.getString("user_name"));
+                owner.setEmail(rs.getString("email"));
+                owner.setPassword(rs.getString("password"));
+                owner.setPanNumber(rs.getString("pan_number"));
+                owner.setCardDetails(rs.getString("card_details"));
+                owner.setApproved(rs.getBoolean("is_approved"));
+                owners.add(owner);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Failed to fetch all owners", e);
+        }
+        return owners;
+    }
 }

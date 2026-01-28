@@ -10,4 +10,9 @@ public interface GymCentreDAO {
     List<GymCentre> findByOwner(String ownerId);
     List<GymCentre> findApprovedCentres();
     GymCentre findById(String centreId);
+
+    /**
+     * Returns all gym centres irrespective of their approval status.
+     */
+    List<GymCentre> findAllCentres();
 }

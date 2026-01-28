@@ -7,6 +7,7 @@ import com.flipfit.dao.GymCentreDAOImpl;
 import com.flipfit.dao.UserDAO;
 import com.flipfit.dao.UserDAOImpl;
 import com.flipfit.exception.ApprovalNotDoneException;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -63,5 +64,37 @@ public class AdminFlipFitService implements AdminFlipFitInterface {
     @Override
     public List<GymCentre> getPendingCentres() {
         return gymCentreDAO.findPendingCentres();
+    }
+
+    @Override
+    public List<GymOwner> getApprovedOwners() {
+        return userDAO.findAllOwners().stream()
+                .filter(GymOwner::isApproved)
+                .sorted(Comparator.comparing(GymOwner::getUserName))
+                .toList();
+    }
+
+    @Override
+    public List<GymOwner> getNotApprovedOwners() {
+        return userDAO.findAllOwners().stream()
+                .filter(owner -> !owner.isApproved())
+                .sorted(Comparator.comparing(GymOwner::getUserName))
+                .toList();
+    }
+
+    @Override
+    public List<GymCentre> getApprovedCentres() {
+        return gymCentreDAO.findAllCentres().stream()
+                .filter(GymCentre::isApproved)
+                .sorted(Comparator.comparing(GymCentre::getCentreName))
+                .toList();
+    }
+
+    @Override
+    public List<GymCentre> getNotApprovedCentres() {
+        return gymCentreDAO.findAllCentres().stream()
+                .filter(centre -> !centre.isApproved())
+                .sorted(Comparator.comparing(GymCentre::getCentreName))
+                .toList();
     }
 }

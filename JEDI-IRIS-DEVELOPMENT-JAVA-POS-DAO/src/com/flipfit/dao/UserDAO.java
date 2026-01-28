@@ -13,4 +13,9 @@ public interface UserDAO {
     boolean changePassword(String userName, String oldPassword, String newPassword);
     boolean updateOwnerApproval(String ownerUserName, boolean isApproved);
     List<GymOwner> findPendingOwners();
+
+    /**
+     * Returns all gym owners irrespective of their approval status.
+     */
+    List<GymOwner> findAllOwners();
 }

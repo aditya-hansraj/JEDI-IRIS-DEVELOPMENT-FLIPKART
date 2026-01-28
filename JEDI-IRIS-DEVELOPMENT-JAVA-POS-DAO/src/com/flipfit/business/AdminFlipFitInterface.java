@@ -46,4 +46,32 @@ public interface AdminFlipFitInterface {
      * @return list of pending gym centres; may be empty
      */
     List<GymCentre> getPendingCentres();
+
+    /**
+     * Returns all approved gym owners.
+     *
+     * @return list of approved gym owners; may be empty
+     */
+    List<GymOwner> getApprovedOwners();
+
+    /**
+     * Returns all not-approved gym owners.
+     *
+     * @return list of not-approved gym owners; may be empty
+     */
+    List<GymOwner> getNotApprovedOwners();
+
+    /**
+     * Returns all approved gym centres.
+     *
+     * @return list of approved gym centres; may be empty
+     */
+    List<GymCentre> getApprovedCentres();
+
+    /**
+     * Returns all not-approved gym centres.
+     *
+     * @return list of not-approved gym centres; may be empty
+     */
+    List<GymCentre> getNotApprovedCentres();
 }
