@@ -1,8 +1,14 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.Booking;
+import com.flipfit.bean.GymCentre;
+import com.flipfit.bean.Slots;
 import com.flipfit.dao.BookingDAO;
 import com.flipfit.dao.BookingDAOImpl;
+import com.flipfit.dao.GymCentreDAO;
+import com.flipfit.dao.GymCentreDAOImpl;
+import com.flipfit.dao.SlotDAO;
+import com.flipfit.dao.SlotDAOImpl;
 import com.flipfit.exception.BookingNotDoneException;
 import com.flipfit.exception.SlotNotAvailableException;
 import java.util.List;
@@ -16,6 +22,8 @@ import java.util.List;
  */
 public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
     private final BookingDAO bookingDAO = new BookingDAOImpl();
+    private final GymCentreDAO gymCentreDAO = new GymCentreDAOImpl();
+    private final SlotDAO slotDAO = new SlotDAOImpl();
 
     /**
      * Book slot.
@@ -29,9 +37,21 @@ public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
      */
     @Override
     public boolean bookSlot(String bookingId, String slotId, String customerId) throws SlotNotAvailableException, BookingNotDoneException {
-        // Simple availability check placeholder (extend with seats logic when slots DAO exposes it)
         if (slotId == null || slotId.isBlank()) {
             throw new SlotNotAvailableException("Slot not available for booking id: " + bookingId);
+        }
+
+        Slots slot = slotDAO.findById(slotId);
+        if (slot == null) {
+            throw new SlotNotAvailableException("No slot found with ID: " + slotId);
+        }
+        if (slot.getAvailableSeats() <= 0) {
+            throw new SlotNotAvailableException("Slot " + slotId + " is fully booked.");
+        }
+
+        boolean seatReserved = slotDAO.reserveSeat(slotId);
+        if (!seatReserved) {
+            throw new SlotNotAvailableException("Slot " + slotId + " just ran out of seats. Please try another slot.");
         }
 
         Booking newBooking = new Booking();
@@ -43,10 +63,39 @@ public class GymCustomerFlipFitService implements GymCustomerFlipFitInterface {
         try {
             bookingDAO.save(newBooking);
         } catch (Exception ex) {
+            slotDAO.releaseSeat(slotId);
             throw new BookingNotDoneException("Could not complete booking for slot: " + slotId, ex);
         }
         System.out.println("Success: Slot " + slotId + " booked! Booking ID: " + bookingId);
         return true;
+    }
+
+    @Override
+    public List<GymCentre> getApprovedCentres() {
+        List<GymCentre> centres = gymCentreDAO.findApprovedCentres();
+        if (centres.isEmpty()) {
+            System.out.println("No centres available right now. Please check back later.");
+        } else {
+            System.out.println("--- APPROVED CENTRES ---");
+            for (GymCentre c : centres) {
+                System.out.println("ID: " + c.getCentreId() + " | Name: " + c.getCentreName() + " | City: " + c.getCity());
+            }
+        }
+        return centres;
+    }
+
+    @Override
+    public List<Slots> getSlotsForCentre(String centreId) {
+        List<Slots> slots = slotDAO.findByCentre(centreId);
+        if (slots.isEmpty()) {
+            System.out.println("No slots available for centre: " + centreId);
+        } else {
+            System.out.println("--- SLOTS FOR CENTRE " + centreId + " ---");
+            for (Slots s : slots) {
+                System.out.println("Slot ID: " + s.getSlotId() + " | Time: " + s.getStartTime() + " | Available Seats: " + s.getAvailableSeats());
+            }
+        }
+        return slots;
     }
 
     /**

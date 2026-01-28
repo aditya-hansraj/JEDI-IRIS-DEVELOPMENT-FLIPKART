@@ -8,4 +8,6 @@ public interface GymCentreDAO {
     boolean updateApproval(String centreId, boolean isApproved);
     List<GymCentre> findPendingCentres();
     List<GymCentre> findByOwner(String ownerId);
+    List<GymCentre> findApprovedCentres();
+    GymCentre findById(String centreId);
 }

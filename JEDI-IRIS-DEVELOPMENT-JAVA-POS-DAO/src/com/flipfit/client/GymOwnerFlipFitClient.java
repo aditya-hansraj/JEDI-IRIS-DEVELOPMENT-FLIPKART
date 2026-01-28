@@ -4,6 +4,7 @@ import com.flipfit.business.GymOwnerFlipFitService;
 import com.flipfit.bean.GymCentre;
 import com.flipfit.bean.Slots;
 import com.flipfit.exception.RegistrationNotDoneException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -57,15 +58,26 @@ public class GymOwnerFlipFitClient {
                     }
                     break;
                 case 3:
+                    System.out.println("\nSelect a centre to add the slot into:");
+                    List<GymCentre> myCentres = ownerService.viewMyCentres(ownerId);
+                    if (myCentres.isEmpty()) {
+                        System.out.println("Add a centre before creating slots.");
+                        break;
+                    }
                     System.out.print("Enter Centre ID: ");
                     String centreId = scanner.nextLine();
                     System.out.print("Enter Slot Time: ");
                     String time = scanner.nextLine();
+                    System.out.print("Enter Total Seats: ");
+                    int totalSeats = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
 
                     Slots newSlot = new Slots();
                     newSlot.setSlotId(UUID.randomUUID().toString().substring(0, 8));
                     newSlot.setCentreId(centreId);
                     newSlot.setStartTime(time);
+                    newSlot.setTotalSeats(totalSeats);
+                    newSlot.setAvailableSeats(totalSeats);
 
                     try {
                         ownerService.addSlot(newSlot);

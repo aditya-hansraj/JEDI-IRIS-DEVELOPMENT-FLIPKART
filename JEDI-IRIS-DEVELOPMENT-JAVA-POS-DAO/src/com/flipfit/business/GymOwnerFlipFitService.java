@@ -45,6 +45,12 @@ public class GymOwnerFlipFitService implements GymOwnerFlipFitInterface {
      */
     @Override
     public void addSlot(Slots slot) throws RegistrationNotDoneException {
+        if (slot.getTotalSeats() <= 0) {
+            throw new RegistrationNotDoneException("Total seats must be greater than zero for slot: " + slot.getSlotId());
+        }
+        if (slot.getAvailableSeats() == 0) {
+            slot.setAvailableSeats(slot.getTotalSeats());
+        }
         try {
             slotDAO.save(slot);
         } catch (Exception ex) {
