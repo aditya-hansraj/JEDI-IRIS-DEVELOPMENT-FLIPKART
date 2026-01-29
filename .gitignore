@@ -6,4 +6,8 @@ out/
 *.idea*
 >>>>>>> 1acf340 (update gitignore)
 
-*/bin/*
+*/bin/*.DS_Store
+.idea/
+.vscode/
+target/
+out/
